@@ -60,6 +60,7 @@ func main() {
 	chain := InitBlockChain()
 	base := "http://localhost:3000/api/v1/blocks"
 	cont := 0
+	chain.blocks[cont].Print()
 	for {
 		cont++
 		text, _ := reader.ReadString('\n')
@@ -78,8 +79,9 @@ func main() {
 		resp, err := http.Post(base, "application/json", postContent)
 		if err != nil {
 			panic(err)
+			fmt.Println(resp.Body)
 		}
-		fmt.Println(resp.Body)
+		chain.blocks[cont].Print()
 	}
 }
 
